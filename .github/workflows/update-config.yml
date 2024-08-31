@@ -18,7 +18,14 @@ jobs:
           git config --local user.name "GitHub Action"
           git checkout --orphan public
           git reset --hard
-          cp clash-config.yaml index.yaml
+
+          if [ -f clash-config.yaml ]; then
+            cp clash-config.yaml index.yaml
+          else
+            echo "# Placeholder Clash config" > index.yaml
+            echo "Error: clash-config.yaml not found. Created a placeholder." >&2
+          fi
+
           git add index.yaml
           git commit -m "Update Clash config"
           git push origin public --force

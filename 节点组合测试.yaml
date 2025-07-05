@@ -42,7 +42,7 @@ tcp-concurrent: true
 proxy-providers:
   provider组合:
     type: http
-    url: "https://metropolitan-exploring-oven-determination.trycloudflare.com/mihomo.yaml"
+    url: "http://192.168.1.11:8199/mihomo.yaml"
     interval: 3600
     path: ./proxy_providers/provider组合.yaml
     health-check:

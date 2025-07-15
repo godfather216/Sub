@@ -16,7 +16,6 @@ jobs:
           git clone https://x-access-token:$GH_PAT@github.com/${{ github.repository }} repo
           cd repo
 
-          # 下载多个 Gist 文件，直接命名为目标文件名
           curl -sSL https://gist.githubusercontent.com/godfather216/3e98be75088df4bd543d83325f788297/raw/1.yaml -o all.yaml
           curl -sSL https://gist.githubusercontent.com/godfather216/3e98be75088df4bd543d83325f788297/raw/2.yaml -o cn.yaml
 

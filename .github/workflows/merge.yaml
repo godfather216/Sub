@@ -14,7 +14,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: 安装 yq（处理 YAML）
-        run: sudo snap install yq
+        run: |
+          sudo apt update
+          sudo apt install -y wget
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+          chmod +x /usr/bin/yq
+          yq --version
 
       - name: 合并 base.yaml + all.yaml 为 final.yaml
         run: |
@@ -26,9 +31,8 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "github-actions"
-          
           git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
-          
+
           git add final.yaml
           git commit -m "🤖 自动合并节点 $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push

@@ -1,9 +1,9 @@
-name: 自动合并 Clash 节点配置
+name: 自动合并 Clash 节点配置（终极稳定版）
 
 on:
   schedule:
     - cron: '*/30 * * * *'  # 每 30 分钟执行一次
-  workflow_dispatch:
+  workflow_dispatch:        # 支持手动触发
 
 jobs:
   merge:
@@ -13,15 +13,22 @@ jobs:
       - name: Checkout 仓库
         uses: actions/checkout@v3
 
-      - name: 安装 yq（本地）
+      - name: 下载 base.yaml 和 all.yaml（如果 all.yaml 是 Gist 自动推送，可省略）
         run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O ./yq
-          chmod +x ./yq
-          ./yq --version
+          ls -l
+          echo "确保 base.yaml 与 all.yaml 均已存在于仓库根目录"
 
-      - name: 合并 base.yaml + all.yaml 为 final.yaml
+      - name: 合并 base.yaml + all.yaml → final.yaml（保留 emoji / 原始结构）
         run: |
-          ./yq eval-all 'select(fileIndex == 0) * {"proxies": select(fileIndex == 1).proxies}' base.yaml all.yaml > final.yaml
+          awk '
+            BEGIN { inserted=0 }
+            /^proxies:/ && !inserted {
+              print "proxies:"; 
+              system("sed -n \"/^proxies:/,/^$/p\" all.yaml | tail -n +2 | sed \"s/^/  /\"")
+              inserted=1; next
+            }
+            { print }
+          ' base.yaml > final.yaml
 
       - name: 提交并推送 final.yaml
         env:
@@ -32,5 +39,5 @@ jobs:
           git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
 
           git add final.yaml
-          git commit -m "🤖 自动合并节点 $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes"
+          git commit -m "🤖 自动合并节点（保留原格式） - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push

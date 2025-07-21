@@ -30,7 +30,7 @@ jobs:
             { print }
           ' base.yaml > "电报群@dizhujiacl.yaml"
 
-      - name: 合并 base.yaml + tele_cn.yaml → 加入电报群@dizhujiacl.yaml
+      - name: 合并 base-cn.yaml + tele_cn.yaml → 加入电报群@dizhujiacl.yaml
         run: |
           awk '
             BEGIN { inserted=0 }
@@ -40,7 +40,7 @@ jobs:
               inserted=1; next
             }
             { print }
-          ' base.yaml > "加入电报群@dizhujiacl.yaml"
+          ' base-cn.yaml > "加入电报群@dizhujiacl.yaml"
 
       - name: 提交并推送到仓库
         env:

@@ -607,10 +607,17 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
   - name: TikTok
-    include-all: true
     type: select
-    filter: (?i)TK
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
+    proxies:
+      - 节点选择
+      - 手动切换
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 狮城节点
+      - 韩国节点
+      - 加入电报群@dizhujiacl
   - name: Spotify
     type: select
     icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/spotify.png

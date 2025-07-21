@@ -399,7 +399,7 @@ proxies:
     - {"alpn":[""],"alterId":"0","cipher":"auto","http-opts":{"headers":{},"path":["/"]},"name":"🇩🇪DE_10 |5.4MB/s|53%|TK-DE|YT-DE|NF|GPT","network":"http","port":8080,"server":"159.89.22.229","skip-cert-verify":false,"tls":false,"type":"vmess","udp":true,"uuid":"ff5c50fc-0ca7-53f9-007c-5b3f6511f1e1","xudp":true}
 
 proxy-groups:
-  - name: "节点选择"
+  - name: 节点选择
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_Fitness+.png
     proxies:
@@ -413,7 +413,7 @@ proxy-groups:
       - 韩国节点
       - 加入电报群@dizhujiacl
       - DIRECT
-  - name: "自动选择"
+  - name: 自动选择
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cellular.png
     proxies:
@@ -424,17 +424,18 @@ proxy-groups:
       - 狮城节点
       - 韩国节点
       - 加入电报群@dizhujiacl
-  - name: "手动切换"
+  - name: 手动切换
+    include-all: true
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🇸🇬 狮城节点
-      - 加入电报群@dizhujiacl
-  - name: "TikTok"
+  - name: TikTok
+    include-all: true
     type: select
+    filter: (?i)TK
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
+  - name: Spotify
+    type: select
+    icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/spotify.png
     proxies:
       - 节点选择
       - 手动切换
@@ -445,20 +446,9 @@ proxy-groups:
       - 狮城节点
       - 韩国节点
       - 加入电报群@dizhujiacl
-  - name: "Spotify"
+  - name: OpenAI
     type: select
-    proxies:
-      - 节点选择
-      - 手动切换
-      - 香港节点
-      - 日本节点
-      - 美国节点
-      - 台湾节点
-      - 狮城节点
-      - 韩国节点
-      - 加入电报群@dizhujiacl
-  - name: "OpenAI"
-    type: select
+    icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/anthropic.png
     proxies:
       - 节点选择
       - 手动切换
@@ -468,7 +458,8 @@ proxy-groups:
       - 狮城节点
       - 韩国节点
       - 加入电报群@dizhujiacl
-  - name: "YouTube"
+  - name: YouTube
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     type: select
     proxies:
       - 节点选择
@@ -481,69 +472,74 @@ proxy-groups:
       - 狮城节点
       - 韩国节点
       - 加入电报群@dizhujiacl
-  - name: "漏网之鱼"
-    type: select
-    proxies:
-      - 节点选择
-      - DIRECT
-  - name: "加入电报群@dizhujiacl"
+  - name: 加入电报群@dizhujiacl
+    include-all: true
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  - name: 漏网之鱼
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
     proxies:
-      - 🇭🇰 香港节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🇸🇬 狮城节点
-  - name: "香港节点"
+      - 节点选择
+      - DIRECT
+  - name: 香港节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇭🇰 香港节点
-  - name: "日本节点"
+    ffilter: (?i)港|hk|🇭🇰|hongkong
+  - name: 日本节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇯🇵 日本节点
-  - name: "美国节点"
+    filter: (?i)日本|jp|🇯🇵|japan|东京|大阪|泉日|埼玉|沪日|深日
+  - name: 美国节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇺🇸 美国节点
-  - name: "台湾节点"
+    filter: (?i)美|us|🇺🇸|united
+      states|america|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥
+  - name: 台湾节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇨🇳 台湾节点
-  - name: "狮城节点"
+    filter: (?i)台|新北|彰化|TW|Taiwan|新北|彰化
+  - name: 狮城节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇸🇬 狮城节点
-  - name: "韩国节点"
+    filter: (?i)新加坡|狮城|🇸🇬|sg|singapore
+  - name: 韩国节点
+    include-all: true
     type: load-balance
     strategy: consistent-hashing
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-    proxies:
-      - 🇰🇷 韩国节点
+    filter: (?i)韩|KR|🇰🇷|korea|首尔|韩|韓
 
 rule-providers:
   reject:

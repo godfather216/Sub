@@ -1,0 +1,29 @@
+name: 自动合并 Clash 节点配置
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # 每 30 分钟执行一次
+  workflow_dispatch:        # 也允许手动触发
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 仓库
+        uses: actions/checkout@v3
+
+      - name: 安装 yq（处理 YAML）
+        run: sudo snap install yq
+
+      - name: 合并 base.yaml + all.yaml 为 final.yaml
+        run: |
+          yq eval-all 'select(fileIndex == 0) * {"proxies": select(fileIndex == 1).proxies}' base.yaml all.yaml > final.yaml
+
+      - name: 提交并推送 final.yaml
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add final.yaml
+          git commit -m "🤖 自动合并节点 $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes"
+          git push

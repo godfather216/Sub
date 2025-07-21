@@ -41,13 +41,10 @@ tun:
 profile:
   store-selected: true
   store-fake-ip: true
-
 tcp-concurrent: true
 
-# ✅ proxies 节点留空，由 GitHub Actions 合并
 proxies: []
 
-# ✅ 以下内容不变，保持你原有逻辑
 proxy-groups:
   - name: "节点选择"
     type: select

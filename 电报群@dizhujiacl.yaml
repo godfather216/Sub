@@ -1078,11 +1078,13 @@ rules:
   - DOMAIN-SUFFIX,telegram.org,节点选择
   - DOMAIN-SUFFIX,youtube.com,YouTube
   - DOMAIN-SUFFIX,openai.com,OpenAI
+  - DOMAIN-SUFFIX,gemini-pa.googleapis.co,OpenAI
   - DOMAIN-SUFFIX,anthropic.com,OpenAI
   - DOMAIN-KEYWORD,youtube,YouTube
   - DOMAIN-KEYWORD,ytimg,YouTube
   - DOMAIN-KEYWORD,claude,OpenAI
   - DOMAIN-KEYWORD,chatgpt,OpenAI
+  - DOMAIN-KEYWORD,gemini,OpenAI
   - DOMAIN-KEYWORD,tiktok,TikTok
   - DOMAIN-KEYWORD,tiktokv,TikTok
   - DOMAIN-KEYWORD,t.co,节点选择
